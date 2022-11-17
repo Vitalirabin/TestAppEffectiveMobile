@@ -19,7 +19,6 @@ class MainAdapter(
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val icon: View = itemView.findViewById(R.id.category_view)
         val name: TextView = itemView.findViewById(R.id.category_name)
-
         fun bind(
             category: CategoryModel,
             onClickListener: ItemOnClickListener

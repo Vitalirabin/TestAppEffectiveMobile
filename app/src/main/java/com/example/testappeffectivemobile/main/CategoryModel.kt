@@ -1,9 +1,12 @@
 package com.example.testappeffectivemobile.main
 
-import android.media.Image
+import android.graphics.drawable.Drawable
 
 data class CategoryModel(
     var name: String,
-    var icon: Image,
-    var background: Int
+    var icon: Drawable?,
+    var selectIcon: Drawable?,
+    var background: Drawable?,
+    var selectBackground: Drawable?,
+    var isSelected: Boolean
 )

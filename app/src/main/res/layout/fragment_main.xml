@@ -73,7 +73,7 @@
             android:id="@+id/select_category_recycle_view"
             android:layout_width="match_parent"
             android:layout_height="94dp"
-            android:layout_marginStart="24dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="24dp"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"

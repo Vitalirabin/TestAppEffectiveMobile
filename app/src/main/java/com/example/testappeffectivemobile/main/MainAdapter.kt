@@ -3,6 +3,7 @@ package com.example.testappeffectivemobile.main
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -17,13 +18,22 @@ class MainAdapter(
 
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val icon: View = itemView.findViewById(R.id.category_view)
+        val bacground: View = itemView.findViewById(R.id.category_view)
         val name: TextView = itemView.findViewById(R.id.category_name)
+        val image: ImageView = itemView.findViewById(R.id.category_item_image_view)
         fun bind(
             category: CategoryModel,
             onClickListener: ItemOnClickListener
         ) {
             this.name.text = category.name
+            if (category.isSelected) {
+                this.bacground.background = category.selectBackground
+                this.image.setImageDrawable(category.selectIcon)
+            } else {
+                this.bacground.background = category.background
+                this.image.setImageDrawable(category.icon)
+            }
+
             itemView.setOnClickListener { onClickListener.onClick(category.name) }
         }
     }
@@ -37,8 +47,8 @@ class MainAdapter(
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        val match = getItem(position)
-        holder.bind(match, onClickListener)
+        val category = getItem(position)
+        holder.bind(category, onClickListener)
     }
 
 }

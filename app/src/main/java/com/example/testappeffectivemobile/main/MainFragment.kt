@@ -1,20 +1,25 @@
 package com.example.testappeffectivemobile.main
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.testappeffectivemobile.BaseFragment
+import com.example.testappeffectivemobile.ItemOnClickListener
 import com.example.testappeffectivemobile.R
 import com.example.testappeffectivemobile.databinding.FragmentMainBinding
 
 class MainFragment() : BaseFragment() {
 
-    override fun getLayoutId(): Int = R.layout.fragment_main
-
     private var _binding: FragmentMainBinding? = null
     private val binding get() = _binding!!
+    private var adapter: MainAdapter? = null
+    private var mainViewModel = MainViewModel()
+
+    override fun getLayoutId(): Int = R.layout.fragment_main
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -34,5 +39,29 @@ class MainFragment() : BaseFragment() {
             spinner.adapter = adapter
         }
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        val categoryList = mainViewModel.getCategory(requireContext(), "Phone")
+        super.onViewCreated(view, savedInstanceState)
+        adapter = MainAdapter(object : ItemOnClickListener {
+            override fun onClick(name: String) {
+                click(name)
+            }
+        })
+        binding.selectCategoryRecycleView.layoutManager = LinearLayoutManager(context).apply {
+            orientation = LinearLayoutManager.HORIZONTAL
+        }
+        binding.selectCategoryRecycleView.adapter = adapter
+        adapter!!.submitList(categoryList)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        adapter = null
+    }
+
+    fun click(name: String) {
+        Log.d("MainFragment", name)
     }
 }

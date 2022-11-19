@@ -132,7 +132,7 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/hot_seller_recycle_view"
-            android:layout_width="378dp"
+            android:layout_width="match_parent"
             android:layout_height="182dp"
             android:layout_marginStart="15dp"
             android:layout_marginTop="8dp"
@@ -142,7 +142,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
         <TextView
-            android:id="@+id/textView4"
+            android:id="@+id/item_title_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="17dp"
@@ -163,7 +163,7 @@
             android:layout_marginEnd="18dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView4" />
+            app:layout_constraintTop_toBottomOf="@+id/item_title_text_view" />
 
         <View
             android:id="@+id/view2"

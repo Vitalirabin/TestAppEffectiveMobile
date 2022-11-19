@@ -1,4 +1,4 @@
-package com.example.testappeffectivemobile.main.hot
+package com.example.testappeffectivemobile.main.best
 
 import android.view.LayoutInflater
 import android.view.View
@@ -11,12 +11,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.testappeffectivemobile.ItemOnClickListener
 import com.example.testappeffectivemobile.R
+import com.example.testappeffectivemobile.main.hot.HotSalesDiffUtil
+import com.example.testappeffectivemobile.main.hot.HotSalesModel
 
 val diffCallback = HotSalesDiffUtil()
 
-class HotSalesAdapter(
+class BeastSellerAdapter(
     val onClickListener: ItemOnClickListener
-) : ListAdapter<HotSalesModel, HotSalesAdapter.MyViewHolder>(diffCallback) {
+) : ListAdapter<HotSalesModel, BeastSellerAdapter.MyViewHolder>(diffCallback) {
 
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

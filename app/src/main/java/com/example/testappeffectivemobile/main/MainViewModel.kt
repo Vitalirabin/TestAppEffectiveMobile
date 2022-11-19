@@ -1,13 +1,24 @@
 package com.example.testappeffectivemobile.main
 
 import android.content.Context
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.testappeffectivemobile.R
 import com.example.testappeffectivemobile.main.category.Category
 import com.example.testappeffectivemobile.main.category.CategoryModel
+import com.example.testappeffectivemobile.main.hot.HotSalesModel
+import kotlinx.coroutines.launch
 
-class MainViewModel : ViewModel() {
+class MainViewModel(private val mainUseCase: MainUseCase?) : ViewModel() {
     val categoryList = mutableListOf<CategoryModel>()
+    val hotSalesList = MutableLiveData<List<HotSalesModel>>()
+
+    fun updateHotSalesList(){
+        viewModelScope.launch {
+            hotSalesList.value=mainUseCase?.getHotSalesList()?.hotSales
+        }
+    }
 
     fun updateCategory(name: String) {
         categoryList.forEach {

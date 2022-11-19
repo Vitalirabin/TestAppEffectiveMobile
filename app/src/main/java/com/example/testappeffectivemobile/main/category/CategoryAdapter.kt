@@ -33,7 +33,6 @@ class CategoryAdapter(
                 this.bacground.background = category.background
                 this.image.setImageDrawable(category.icon)
             }
-
             itemView.setOnClickListener { onClickListener.onClick(category.name) }
         }
     }

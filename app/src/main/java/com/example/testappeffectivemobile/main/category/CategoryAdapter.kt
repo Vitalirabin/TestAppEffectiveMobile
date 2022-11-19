@@ -1,4 +1,4 @@
-package com.example.testappeffectivemobile.main
+package com.example.testappeffectivemobile.main.category
 
 import android.view.LayoutInflater
 import android.view.View
@@ -12,9 +12,9 @@ import com.example.testappeffectivemobile.R
 
 val diffCallback = CategoryDiffUtil()
 
-class MainAdapter(
+class CategoryAdapter(
     val onClickListener: ItemOnClickListener
-) : ListAdapter<CategoryModel, MainAdapter.MyViewHolder>(diffCallback) {
+) : ListAdapter<CategoryModel, CategoryAdapter.MyViewHolder>(diffCallback) {
 
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

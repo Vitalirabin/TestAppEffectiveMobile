@@ -3,10 +3,19 @@ package com.example.testappeffectivemobile.main
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import com.example.testappeffectivemobile.R
+import com.example.testappeffectivemobile.main.category.Category
+import com.example.testappeffectivemobile.main.category.CategoryModel
 
 class MainViewModel : ViewModel() {
+    val categoryList = mutableListOf<CategoryModel>()
+
+    fun updateCategory(name: String) {
+        categoryList.forEach {
+            it.isSelected = it.name == name
+        }
+    }
+
     fun getCategory(context: Context, select: String): MutableList<CategoryModel> {
-        val categoryList = mutableListOf<CategoryModel>()
         categoryList.add(
             CategoryModel(
                 context.getString(Category.CATEGORY_PHONE.nameCategoryResId),
@@ -14,7 +23,7 @@ class MainViewModel : ViewModel() {
                 context.getDrawable(R.drawable.phone_select),
                 context.getDrawable(R.drawable.item_select_category),
                 context.getDrawable(R.drawable.item_select_category_select),
-                select=="Phone"
+                select == "Phone"
             )
         )
         categoryList.add(
@@ -24,7 +33,7 @@ class MainViewModel : ViewModel() {
                 context.getDrawable(R.drawable.computer_select),
                 context.getDrawable(R.drawable.item_select_category),
                 context.getDrawable(R.drawable.item_select_category_select),
-                select=="Computer"
+                select == "Computer"
             )
         )
         categoryList.add(
@@ -34,7 +43,7 @@ class MainViewModel : ViewModel() {
                 context.getDrawable(R.drawable.health_select),
                 context.getDrawable(R.drawable.item_select_category),
                 context.getDrawable(R.drawable.item_select_category_select),
-                select=="Health"
+                select == "Health"
             )
         )
         categoryList.add(
@@ -44,7 +53,7 @@ class MainViewModel : ViewModel() {
                 context.getDrawable(R.drawable.books_select),
                 context.getDrawable(R.drawable.item_select_category),
                 context.getDrawable(R.drawable.item_select_category_select),
-                select=="Books"
+                select == "Books"
             )
         )
         return categoryList

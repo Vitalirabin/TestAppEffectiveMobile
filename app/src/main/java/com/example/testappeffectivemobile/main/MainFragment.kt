@@ -11,12 +11,13 @@ import com.example.testappeffectivemobile.BaseFragment
 import com.example.testappeffectivemobile.ItemOnClickListener
 import com.example.testappeffectivemobile.R
 import com.example.testappeffectivemobile.databinding.FragmentMainBinding
+import com.example.testappeffectivemobile.main.category.CategoryAdapter
 
 class MainFragment() : BaseFragment() {
 
     private var _binding: FragmentMainBinding? = null
     private val binding get() = _binding!!
-    private var adapter: MainAdapter? = null
+    private var categoryAdapter: CategoryAdapter? = null
     private var mainViewModel = MainViewModel()
 
     override fun getLayoutId(): Int = R.layout.fragment_main
@@ -44,7 +45,7 @@ class MainFragment() : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val categoryList = mainViewModel.getCategory(requireContext(), "Phone")
         super.onViewCreated(view, savedInstanceState)
-        adapter = MainAdapter(object : ItemOnClickListener {
+        categoryAdapter = CategoryAdapter(object : ItemOnClickListener {
             override fun onClick(name: String) {
                 click(name)
             }
@@ -52,16 +53,19 @@ class MainFragment() : BaseFragment() {
         binding.selectCategoryRecycleView.layoutManager = LinearLayoutManager(context).apply {
             orientation = LinearLayoutManager.HORIZONTAL
         }
-        binding.selectCategoryRecycleView.adapter = adapter
-        adapter!!.submitList(categoryList)
+        binding.selectCategoryRecycleView.adapter = categoryAdapter
+        categoryAdapter!!.submitList(categoryList)
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        adapter = null
+        categoryAdapter = null
     }
 
     fun click(name: String) {
         Log.d("MainFragment", name)
+        mainViewModel.updateCategory(name)
+        binding.selectCategoryRecycleView.adapter=categoryAdapter
+        categoryAdapter?.submitList(mainViewModel.categoryList)
     }
 }

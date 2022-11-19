@@ -1,4 +1,4 @@
-package com.example.testappeffectivemobile.main
+package com.example.testappeffectivemobile.main.category
 
 import com.example.testappeffectivemobile.R
 

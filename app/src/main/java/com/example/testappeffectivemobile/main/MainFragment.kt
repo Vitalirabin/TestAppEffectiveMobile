@@ -1,5 +1,6 @@
 package com.example.testappeffectivemobile.main
 
+import android.animation.ValueAnimator
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -113,15 +114,36 @@ class MainFragment() : BaseFragment() {
         binding.bestSellerRecycleView.layoutManager = GridLayoutManager(context, 2)
         binding.bestSellerRecycleView.adapter = bestSellerAdapter
         mainViewModel.updateLists()
-
+        val openingValueAnimator = ValueAnimator.ofInt(1100, 0)
+        openingValueAnimator.duration = 800
+        openingValueAnimator.addUpdateListener {
+            binding.filterOptionsConteiner.translationY =
+                openingValueAnimator.animatedValue.toString().toFloat()
+        }
+        val hidingValueAnimator = ValueAnimator.ofInt(0, 1100)
+        hidingValueAnimator.duration = 800
+        hidingValueAnimator.addUpdateListener {
+            binding.filterOptionsConteiner.translationY =
+                hidingValueAnimator.animatedValue.toString().toFloat()
+        }
         binding.textViewViewAll.setOnClickListener {
+            it.isClickable = false
             binding.filterOptionsConteiner.visibility = View.VISIBLE
+            openingValueAnimator.start()
         }
         binding.closeFilterButton.setOnClickListener {
-            binding.filterOptionsConteiner.visibility = View.INVISIBLE
+            hidingValueAnimator.start()
+            android.os.Handler().postDelayed({
+                binding.filterOptionsConteiner.visibility = View.INVISIBLE
+            }, 800)
+            binding.textViewViewAll.isClickable = true
         }
         binding.doneButton.setOnClickListener {
-            binding.filterOptionsConteiner.visibility = View.INVISIBLE
+            hidingValueAnimator.start()
+            android.os.Handler().postDelayed({
+                binding.filterOptionsConteiner.visibility = View.INVISIBLE
+            }, 800)
+            binding.textViewViewAll.isClickable = true
         }
     }
 

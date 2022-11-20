@@ -4,6 +4,15 @@
     <string-array name="location">
         <item>Zihuatanejo, Gro</item>
     </string-array>
+    <string-array name="brands">
+        <item>Samsung</item>
+    </string-array>
+    <string-array name="prise">
+        <item>$300 - $500</item>
+    </string-array>
+    <string-array name="size_filter">
+        <item>4.5 to 5.5 inches</item>
+    </string-array>
 
     <string name="select_category">Select Category</string>
     <string name="phones">Phones</string>
@@ -23,9 +32,6 @@
     <string name="size">Size</string>
     <string name="done">Done</string>
     <string name="view_all">view all</string>
-    <string name="samsung">Samsung</string>
-    <string name="price1">$300 - $500</string>
-    <string name="size_filter">4.5 to 5.5 inches</string>
 
     <string name="product_details">Product Details</string>
     <string name="shop">Shop</string>

@@ -37,14 +37,37 @@ class MainFragment() : BaseFragment() {
         _binding = FragmentMainBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = this
         binding.mainViewModel = mainViewModel
-        val spinner = binding.locateSpinner
         ArrayAdapter.createFromResource(
             requireContext(),
             R.array.location,
             android.R.layout.simple_spinner_item
         ).also { adapter ->
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            spinner.adapter = adapter
+            binding.locateSpinner.adapter = adapter
+        }
+        ArrayAdapter.createFromResource(
+            requireContext(),
+            R.array.brands,
+            android.R.layout.simple_spinner_item
+        ).also { adapter ->
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            binding.brandFilterSpinner.adapter = adapter
+        }
+        ArrayAdapter.createFromResource(
+            requireContext(),
+            R.array.prise,
+            android.R.layout.simple_spinner_item
+        ).also { adapter ->
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            binding.priseFilterSpinner.adapter = adapter
+        }
+        ArrayAdapter.createFromResource(
+            requireContext(),
+            R.array.size_filter,
+            android.R.layout.simple_spinner_item
+        ).also { adapter ->
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            binding.sizeFilterSpinner.adapter = adapter
         }
         return binding.root
     }
@@ -90,6 +113,16 @@ class MainFragment() : BaseFragment() {
         binding.bestSellerRecycleView.layoutManager = GridLayoutManager(context, 2)
         binding.bestSellerRecycleView.adapter = bestSellerAdapter
         mainViewModel.updateLists()
+
+        binding.textViewViewAll.setOnClickListener {
+            binding.filterOptionsConteiner.visibility = View.VISIBLE
+        }
+        binding.closeFilterButton.setOnClickListener {
+            binding.filterOptionsConteiner.visibility = View.INVISIBLE
+        }
+        binding.doneButton.setOnClickListener {
+            binding.filterOptionsConteiner.visibility = View.INVISIBLE
+        }
     }
 
     override fun onDestroyView() {

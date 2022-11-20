@@ -237,7 +237,7 @@
             android:layout_width="match_parent"
             android:layout_height="375dp"
             android:background="@drawable/filter_background"
-            android:visibility="visible"
+            android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
@@ -246,11 +246,10 @@
                 android:id="@+id/close_filter_button"
                 android:layout_width="37dp"
                 android:layout_height="37dp"
-                android:layout_marginStart="44dp"
                 android:layout_marginTop="24dp"
                 android:background="@drawable/filter_close_background"
                 android:src="@drawable/vector_cross"
-                app:layout_constraintStart_toStartOf="@+id/filter_options_conteiner"
+                app:layout_constraintStart_toStartOf="@+id/brand_filter_spinner"
                 app:layout_constraintTop_toTopOf="@+id/filter_options_conteiner" />
 
             <Button
@@ -283,21 +282,20 @@
                 android:id="@+id/brand_filter_textview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="46dp"
                 android:layout_marginTop="24dp"
                 android:text="@string/brand"
                 android:textColor="@color/blue"
                 android:textSize="18sp"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/brand_filter_spinner"
                 app:layout_constraintTop_toBottomOf="@+id/close_filter_button" />
 
             <Spinner
-                android:id="@+id/spinner"
+                android:id="@+id/brand_filter_spinner"
                 android:layout_width="337dp"
                 android:layout_height="37dp"
-                android:layout_marginStart="46dp"
                 android:layout_marginTop="4dp"
                 android:background="@drawable/filter_spiner"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/brand_filter_textview" />
 
@@ -305,31 +303,30 @@
                 android:id="@+id/textView5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="46dp"
                 android:layout_marginTop="20dp"
                 android:text="@string/price"
                 android:textColor="@color/blue"
                 android:textSize="18sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/spinner" />
+                app:layout_constraintStart_toStartOf="@+id/prise_filter_spinner"
+                app:layout_constraintTop_toBottomOf="@+id/brand_filter_spinner" />
 
             <Spinner
-                android:id="@+id/spinner2"
+                android:id="@+id/prise_filter_spinner"
                 android:layout_width="337dp"
                 android:layout_height="37dp"
-                android:layout_marginStart="46dp"
                 android:layout_marginTop="4dp"
                 android:background="@drawable/filter_spiner"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
             <Spinner
-                android:id="@+id/spinner3"
+                android:id="@+id/size_filter_spinner"
                 android:layout_width="337dp"
                 android:layout_height="37dp"
-                android:layout_marginStart="46dp"
                 android:layout_marginTop="4dp"
                 android:background="@drawable/filter_spiner"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
@@ -337,13 +334,12 @@
                 android:id="@+id/textView7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="46dp"
                 android:layout_marginTop="20dp"
                 android:text="@string/size"
                 android:textColor="@color/blue"
                 android:textSize="18sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/spinner2" />
+                app:layout_constraintStart_toStartOf="@+id/size_filter_spinner"
+                app:layout_constraintTop_toBottomOf="@+id/prise_filter_spinner" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.testappeffectivemobile.R
+import com.example.testappeffectivemobile.main.best.BestSellerModel
 import com.example.testappeffectivemobile.main.category.Category
 import com.example.testappeffectivemobile.main.category.CategoryModel
 import com.example.testappeffectivemobile.main.hot.HotSalesModel
@@ -13,14 +14,23 @@ import kotlinx.coroutines.launch
 class MainViewModel(private val mainUseCase: MainUseCase?) : ViewModel() {
     val categoryList = mutableListOf<CategoryModel>()
     val hotSalesList = MutableLiveData<List<HotSalesModel>>()
+    val bestSellerList = MutableLiveData<List<BestSellerModel>>()
 
-    fun updateHotSalesList(){
+    fun updateLists() {
         viewModelScope.launch {
-            hotSalesList.value=mainUseCase?.getHotSalesList()?.hotSales
+            val modelFromApi = mainUseCase?.getHotSalesList()
+            bestSellerList.value = modelFromApi?.bestSallers
+            hotSalesList.value = modelFromApi?.hotSales
         }
     }
 
-    fun updateCategory(name: String) {
+    fun clickLike(id: String) {
+        bestSellerList.value?.forEach {
+            it.is_favorites = it.id == id
+        }
+    }
+
+    fun changeCategory(name: String) {
         categoryList.forEach {
             it.isSelected = it.name == name
         }

@@ -7,11 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.testappeffectivemobile.BaseFragment
 import com.example.testappeffectivemobile.ItemOnClickListener
 import com.example.testappeffectivemobile.R
 import com.example.testappeffectivemobile.databinding.FragmentMainBinding
+import com.example.testappeffectivemobile.main.best.BestSellerAdapter
 import com.example.testappeffectivemobile.main.category.CategoryAdapter
 import com.example.testappeffectivemobile.main.hot.HotSalesAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -22,6 +24,7 @@ class MainFragment() : BaseFragment() {
     private val binding get() = _binding!!
     private var categoryAdapter: CategoryAdapter? = null
     private var hotSalesAdapter: HotSalesAdapter? = null
+    private var bestSellerAdapter: BestSellerAdapter? = null
     private val mainViewModel: MainViewModel by viewModel()
 
     override fun getLayoutId(): Int = R.layout.fragment_main
@@ -66,7 +69,6 @@ class MainFragment() : BaseFragment() {
         if (hotSalesAdapter == null) {
             hotSalesAdapter = HotSalesAdapter(object : ItemOnClickListener {
                 override fun onClick(name: String) {
-                    clickCategory(name)
                 }
             })
         }
@@ -74,7 +76,20 @@ class MainFragment() : BaseFragment() {
             orientation = LinearLayoutManager.HORIZONTAL
         }
         binding.hotSellerRecycleView.adapter = hotSalesAdapter
-        mainViewModel.updateHotSalesList()
+
+        mainViewModel.bestSellerList.observe(viewLifecycleOwner, Observer {
+            bestSellerAdapter?.submitList(it)
+        })
+        if (bestSellerAdapter == null) {
+            bestSellerAdapter = BestSellerAdapter(object : ItemOnClickListener {
+                override fun onClick(name: String) {
+
+                }
+            })
+        }
+        binding.bestSellerRecycleView.layoutManager = GridLayoutManager(context, 2)
+        binding.bestSellerRecycleView.adapter = bestSellerAdapter
+        mainViewModel.updateLists()
     }
 
     override fun onDestroyView() {
@@ -84,7 +99,12 @@ class MainFragment() : BaseFragment() {
 
     fun clickCategory(name: String) {
         Log.d("MainFragment", name)
-        mainViewModel.updateCategory(name)
+        mainViewModel.changeCategory(name)
         categoryAdapter?.notifyDataSetChanged()
+    }
+
+    fun clickLike(id: String) {
+        mainViewModel.clickLike(id)
+        bestSellerAdapter?.notifyDataSetChanged()
     }
 }

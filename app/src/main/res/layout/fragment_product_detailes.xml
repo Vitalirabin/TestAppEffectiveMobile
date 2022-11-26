@@ -1,38 +1,320 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <ImageButton
-        android:id="@+id/imageButton2"
-        android:layout_width="37dp"
-        android:layout_height="37dp"
-        android:layout_marginTop="36dp"
-        android:background="@drawable/filter_close_background"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/vectorarrowleft" />
+    <data>
 
-    <ImageButton
-        android:id="@+id/imageButton6"
-        android:layout_width="37dp"
-        android:layout_height="37dp"
-        android:background="@drawable/filter_done_background"
-        app:layout_constraintBottom_toBottomOf="@+id/imageButton2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageButton2"
-        app:srcCompat="@drawable/vectorcart" />
+        <variable
+            name="productViewModel"
+            type="com.example.testappeffectivemobile.product.ProductDetailsViewModel" />
+    </data>
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/product_details"
-        android:textColor="@color/blue"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageButton2"
-        app:layout_constraintEnd_toStartOf="@+id/imageButton6"
-        app:layout_constraintStart_toEndOf="@+id/imageButton2"
-        app:layout_constraintTop_toTopOf="@+id/imageButton2" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/main_background">
+
+        <ImageButton
+            android:id="@+id/back_button"
+            android:layout_width="37dp"
+            android:layout_height="37dp"
+            android:layout_marginStart="42dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/filter_close_background"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/vectorarrowleft" />
+
+        <ImageButton
+            android:id="@+id/product_cart_button"
+            android:layout_width="37dp"
+            android:layout_height="37dp"
+            android:layout_marginEnd="35dp"
+            android:background="@drawable/filter_done_background"
+            app:layout_constraintBottom_toBottomOf="@+id/back_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/back_button"
+            app:srcCompat="@drawable/vectorcart" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/product_details"
+            android:textColor="@color/blue"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@+id/back_button"
+            app:layout_constraintEnd_toStartOf="@+id/product_cart_button"
+            app:layout_constraintStart_toEndOf="@+id/back_button"
+            app:layout_constraintTop_toTopOf="@+id/back_button" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/filter_background"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/photo_product_details_recycle_view"
+            app:layout_constraintVertical_bias="0.0">
+
+            <Button
+                android:id="@+id/features_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="40dp"
+                android:background="@color/invisible"
+                android:text="@string/features"
+                android:textAllCaps="false"
+                android:textColor="@color/text_color_product_details_buttons"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/details_buttons" />
+
+            <ImageView
+                android:id="@+id/imageView6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="68dp"
+                app:layout_constraintStart_toEndOf="@+id/imageView5"
+                app:layout_constraintTop_toTopOf="@+id/imageView5"
+                app:srcCompat="@drawable/vector_memory" />
+
+            <ImageButton
+                android:id="@+id/product_details_like_button"
+                android:layout_width="37dp"
+                android:layout_height="37dp"
+                android:layout_marginTop="28dp"
+                android:layout_marginEnd="37dp"
+                android:background="@drawable/filter_close_background"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/vector_unlike_white" />
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="38dp"
+                android:layout_marginBottom="7dp"
+                android:text="@{productViewModel.productDetailsModel.title}"
+                android:textColor="@color/blue"
+                android:textSize="24sp"
+                app:layout_constraintBottom_toTopOf="@+id/star1"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <ImageView
+                android:id="@+id/star1"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/star"
+                app:layout_constraintBottom_toTopOf="@+id/shop_button"
+                app:layout_constraintStart_toStartOf="@+id/textView4" />
+
+            <ImageView
+                android:id="@+id/star2"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_marginStart="9dp"
+                android:background="@drawable/star"
+                app:layout_constraintStart_toEndOf="@+id/star1"
+                app:layout_constraintTop_toTopOf="@+id/star1" />
+
+            <ImageView
+                android:id="@+id/star3"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_marginStart="9dp"
+                android:background="@drawable/star"
+                app:layout_constraintStart_toEndOf="@+id/star2"
+                app:layout_constraintTop_toTopOf="@+id/star2" />
+
+            <ImageView
+                android:id="@+id/star4"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_marginStart="9dp"
+                android:background="@drawable/star"
+                app:layout_constraintStart_toEndOf="@+id/star3"
+                app:layout_constraintTop_toTopOf="@+id/star3" />
+
+            <ImageView
+                android:id="@+id/star5"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_marginStart="9dp"
+                android:background="@drawable/star"
+                app:layout_constraintStart_toEndOf="@+id/star4"
+                app:layout_constraintTop_toTopOf="@+id/star4" />
+
+
+            <Button
+                android:id="@+id/add_to_curt_button"
+                android:layout_width="355dp"
+                android:layout_height="54dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/filter_done_background"
+                android:paddingStart="45dp"
+                android:textAlignment="viewStart"
+                android:textAllCaps="false"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="45dp"
+                app:layout_constraintBottom_toTopOf="@+id/procesor_text_view"
+                app:layout_constraintStart_toStartOf="parent"
+                app:srcCompat="@drawable/vector_procesor" />
+
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="74dp"
+                app:layout_constraintStart_toEndOf="@+id/imageView3"
+                app:layout_constraintTop_toTopOf="@+id/imageView3"
+                app:srcCompat="@drawable/vectorcamera" />
+
+            <ImageView
+                android:id="@+id/imageView5"
+                android:layout_width="28dp"
+                android:layout_height="21dp"
+                android:layout_marginStart="64dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintStart_toEndOf="@+id/imageView4"
+                app:layout_constraintTop_toTopOf="@+id/imageView4"
+                app:srcCompat="@mipmap/operative_memory" />
+
+            <TextView
+                android:id="@+id/procesor_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="29dp"
+                android:text="@{productViewModel.productDetailsModel.CPU}"
+                android:textColor="@color/text_color_product_details"
+                android:textSize="11sp"
+                app:layout_constraintBottom_toTopOf="@+id/select_color_and_capacity_text_view"
+                app:layout_constraintEnd_toEndOf="@+id/imageView3"
+                app:layout_constraintStart_toStartOf="@+id/imageView3" />
+
+            <TextView
+                android:id="@+id/camera_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{productViewModel.productDetailsModel.camera}"
+                android:textColor="@color/text_color_product_details"
+                android:textSize="11sp"
+                app:layout_constraintEnd_toEndOf="@+id/imageView4"
+                app:layout_constraintStart_toStartOf="@+id/imageView4"
+                app:layout_constraintTop_toTopOf="@+id/procesor_text_view" />
+
+            <TextView
+                android:id="@+id/ssd_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{productViewModel.productDetailsModel.ssd}"
+                android:textColor="@color/text_color_product_details"
+                android:textSize="11sp"
+                app:layout_constraintEnd_toEndOf="@+id/imageView5"
+                app:layout_constraintStart_toStartOf="@+id/imageView5"
+                app:layout_constraintTop_toTopOf="@+id/camera_text_view" />
+
+            <TextView
+                android:id="@+id/textView211"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{productViewModel.productDetailsModel.sd}"
+                android:textColor="@color/text_color_product_details"
+                android:textSize="11sp"
+                app:layout_constraintEnd_toEndOf="@+id/imageView6"
+                app:layout_constraintStart_toStartOf="@+id/imageView6"
+                app:layout_constraintTop_toTopOf="@+id/ssd_text_view" />
+
+            <TextView
+                android:id="@+id/select_color_and_capacity_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginBottom="14dp"
+                android:text="@string/select_color_and_capacity"
+                android:textColor="@color/blue"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toTopOf="@+id/color_recycler_view"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/color_recycler_view"
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="34dp"
+                android:layout_marginBottom="27dp"
+                app:layout_constraintBottom_toTopOf="@+id/add_to_curt_button"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/capacity_recycle_view"
+                android:layout_width="160dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="58dp"
+                app:layout_constraintBottom_toBottomOf="@+id/color_recycler_view"
+                app:layout_constraintStart_toEndOf="@+id/color_recycler_view"
+                app:layout_constraintTop_toTopOf="@+id/color_recycler_view" />
+
+            <Button
+                android:id="@+id/shop_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="27dp"
+                android:layout_marginBottom="24dp"
+                android:background="@color/invisible"
+                android:text="@string/shop"
+                android:textAllCaps="false"
+                android:textColor="@color/text_color_product_details_buttons"
+                app:layout_constraintBottom_toTopOf="@+id/imageView3"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <Button
+                android:id="@+id/details_buttons"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/invisible"
+                android:text="@string/details"
+                android:textAllCaps="false"
+                android:textColor="@color/text_color_product_details_buttons"
+                app:layout_constraintEnd_toStartOf="@+id/features_button"
+                app:layout_constraintStart_toEndOf="@+id/shop_button"
+                app:layout_constraintTop_toTopOf="@+id/shop_button" />
+
+            <TextView
+                android:id="@+id/rating_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="@{productViewModel.productDetailsModel.rating.toString()}"
+                android:textAlignment="center"
+                android:textAllCaps="false"
+                android:textColor="@color/blue"
+                android:textSize="12sp"
+                app:layout_constraintStart_toEndOf="@+id/star5"
+                app:layout_constraintTop_toTopOf="@+id/star5" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/photo_product_details_recycle_view"
+            android:layout_width="409dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="24dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/back_button" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

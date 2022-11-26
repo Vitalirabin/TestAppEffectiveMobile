@@ -9,13 +9,13 @@ import android.widget.TextView
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.testappeffectivemobile.ItemOnClickListener
+import com.example.testappeffectivemobile.BestSellerItemOnClickListener
 import com.example.testappeffectivemobile.R
 
 val diffCallback = HotSalesDiffUtil()
 
 class HotSalesAdapter(
-    val onClickListener: ItemOnClickListener
+    val onClickListener: BestSellerItemOnClickListener
 ) : ListAdapter<HotSalesModel, HotSalesAdapter.MyViewHolder>(diffCallback) {
 
 
@@ -27,7 +27,7 @@ class HotSalesAdapter(
         val button = itemView.findViewById<Button>(R.id.buy_now_button)
         fun bind(
             hotSalesModel: HotSalesModel,
-            onClickListener: ItemOnClickListener
+            onClickListener: BestSellerItemOnClickListener
         ) {
             Glide.with(imageView).load(hotSalesModel.picture).centerCrop().into(imageView)
             if (hotSalesModel.is_new) {
@@ -35,7 +35,7 @@ class HotSalesAdapter(
             } else newImageView.visibility = View.INVISIBLE
             title.text = hotSalesModel.title
             subtitle.text = hotSalesModel.subtitle
-            button.setOnClickListener { onClickListener.onClick(hotSalesModel.id) }
+            button.setOnClickListener { onClickListener.onClick(button) }
         }
     }
 

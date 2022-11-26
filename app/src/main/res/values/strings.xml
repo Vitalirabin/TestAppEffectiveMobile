@@ -9,6 +9,10 @@
     </string-array>
     <string-array name="prise">
         <item>$300 - $500</item>
+        <item>$500 - $1000</item>
+        <item>$1000 - $3000</item>
+        <item>$3000 - $5000</item>
+        <item>$5000 - $10000</item>
     </string-array>
     <string-array name="size_filter">
         <item>4.5 to 5.5 inches</item>
@@ -38,6 +42,7 @@
     <string name="details">Details</string>
     <string name="features">Features</string>
     <string name="add_to_cart">Add to Cart</string>
+    <string name="dollar">$</string>
     <string name="select_color_and_capacity">Select color and capacity</string>
 
     <string name="add_address">Add address</string>

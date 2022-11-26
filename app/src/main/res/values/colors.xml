@@ -8,9 +8,12 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <color name="orange">#FF6E4E</color>
+    <color name="first_color">#FF6E4E</color>
     <color name="blue">#010035</color>
     <color name="invisible">#00000035</color>
     <color name="main_background">#F5F5F5</color>
     <color name="item_beast_seller_prise">#CCCCCC</color>
+    <color name="text_color_gray">#8D8D8D</color>
+    <color name="text_color_product_details">#B7B7B7</color>
+    <color name="text_color_product_details_buttons">#80000000</color>
 </resources>

@@ -21,7 +21,7 @@
         android:layout_height="wrap_content"
         android:text="@string/phones"
         android:textAlignment="center"
-        android:textColor="@color/orange"
+        android:textColor="@color/first_color"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

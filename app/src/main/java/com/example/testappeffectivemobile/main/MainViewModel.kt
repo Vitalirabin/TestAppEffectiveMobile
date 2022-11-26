@@ -15,6 +15,13 @@ class MainViewModel(private val mainUseCase: MainUseCase?) : ViewModel() {
     val categoryList = mutableListOf<CategoryModel>()
     val hotSalesList = MutableLiveData<List<HotSalesModel>>()
     val bestSellerList = MutableLiveData<List<BestSellerModel>>()
+    val sizeOfCart = MutableLiveData<Int>()
+
+    fun getSizeOfCartBasket() {
+        viewModelScope.launch {
+            sizeOfCart.value = mainUseCase?.getSizeOfCart()
+        }
+    }
 
     fun updateLists() {
         viewModelScope.launch {

@@ -8,11 +8,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.lifecycle.Observer
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.PagerSnapHelper
 import com.example.testappeffectivemobile.BaseFragment
+import com.example.testappeffectivemobile.BestSellerItemOnClickListener
 import com.example.testappeffectivemobile.ItemOnClickListener
 import com.example.testappeffectivemobile.R
+import com.example.testappeffectivemobile.cart.BasketModel
 import com.example.testappeffectivemobile.databinding.FragmentMainBinding
 import com.example.testappeffectivemobile.main.best.BestSellerAdapter
 import com.example.testappeffectivemobile.main.category.CategoryAdapter
@@ -41,7 +45,7 @@ class MainFragment() : BaseFragment() {
         ArrayAdapter.createFromResource(
             requireContext(),
             R.array.location,
-            android.R.layout.simple_spinner_item
+            R.layout.locate_spinner
         ).also { adapter ->
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             binding.locateSpinner.adapter = adapter
@@ -49,7 +53,7 @@ class MainFragment() : BaseFragment() {
         ArrayAdapter.createFromResource(
             requireContext(),
             R.array.brands,
-            android.R.layout.simple_spinner_item
+            R.layout.filter_option_spiner
         ).also { adapter ->
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             binding.brandFilterSpinner.adapter = adapter
@@ -57,7 +61,7 @@ class MainFragment() : BaseFragment() {
         ArrayAdapter.createFromResource(
             requireContext(),
             R.array.prise,
-            android.R.layout.simple_spinner_item
+            R.layout.filter_option_spiner
         ).also { adapter ->
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             binding.priseFilterSpinner.adapter = adapter
@@ -65,7 +69,7 @@ class MainFragment() : BaseFragment() {
         ArrayAdapter.createFromResource(
             requireContext(),
             R.array.size_filter,
-            android.R.layout.simple_spinner_item
+            R.layout.filter_option_spiner
         ).also { adapter ->
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             binding.sizeFilterSpinner.adapter = adapter
@@ -74,11 +78,24 @@ class MainFragment() : BaseFragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        mainViewModel.sizeOfCart.observe(viewLifecycleOwner, Observer {
+            if (it <= 0) {
+                binding.sizeOfCartTextView.visibility = View.INVISIBLE
+            } else binding.sizeOfCartTextView.text = it.toString()
+        })
         val categoryList = mainViewModel.getCategory(requireContext(), "Phone")
         super.onViewCreated(view, savedInstanceState)
         categoryAdapter = CategoryAdapter(object : ItemOnClickListener {
             override fun onClick(name: String) {
                 clickCategory(name)
+            }
+
+            override fun onClickPlus(name: BasketModel) {
+                TODO("Not yet implemented")
+            }
+
+            override fun onClickMinus(name: BasketModel) {
+                TODO("Not yet implemented")
             }
         })
         binding.selectCategoryRecycleView.layoutManager = LinearLayoutManager(context).apply {
@@ -91,11 +108,14 @@ class MainFragment() : BaseFragment() {
             hotSalesAdapter?.submitList(it)
         })
         if (hotSalesAdapter == null) {
-            hotSalesAdapter = HotSalesAdapter(object : ItemOnClickListener {
-                override fun onClick(name: String) {
+            hotSalesAdapter = HotSalesAdapter(object : BestSellerItemOnClickListener {
+                override fun onClick(view: View) {
+                    goToProductDetails(view)
                 }
             })
         }
+        val snapHelper = PagerSnapHelper()
+        snapHelper.attachToRecyclerView(binding.hotSellerRecycleView)
         binding.hotSellerRecycleView.layoutManager = LinearLayoutManager(context).apply {
             orientation = LinearLayoutManager.HORIZONTAL
         }
@@ -105,28 +125,31 @@ class MainFragment() : BaseFragment() {
             bestSellerAdapter?.submitList(it)
         })
         if (bestSellerAdapter == null) {
-            bestSellerAdapter = BestSellerAdapter(object : ItemOnClickListener {
-                override fun onClick(name: String) {
-
+            bestSellerAdapter = BestSellerAdapter(object : BestSellerItemOnClickListener {
+                override fun onClick(view: View) {
+                    goToProductDetails(view)
                 }
             })
         }
         binding.bestSellerRecycleView.layoutManager = GridLayoutManager(context, 2)
         binding.bestSellerRecycleView.adapter = bestSellerAdapter
+
         mainViewModel.updateLists()
+        mainViewModel.getSizeOfCartBasket()
+
         val openingValueAnimator = ValueAnimator.ofInt(1100, 0)
-        openingValueAnimator.duration = 800
+        openingValueAnimator.duration = 200
         openingValueAnimator.addUpdateListener {
             binding.filterOptionsConteiner.translationY =
                 openingValueAnimator.animatedValue.toString().toFloat()
         }
         val hidingValueAnimator = ValueAnimator.ofInt(0, 1100)
-        hidingValueAnimator.duration = 800
+        hidingValueAnimator.duration = 200
         hidingValueAnimator.addUpdateListener {
             binding.filterOptionsConteiner.translationY =
                 hidingValueAnimator.animatedValue.toString().toFloat()
         }
-        binding.textViewViewAll.setOnClickListener {
+        binding.filterButton.setOnClickListener {
             it.isClickable = false
             binding.filterOptionsConteiner.visibility = View.VISIBLE
             openingValueAnimator.start()
@@ -135,15 +158,19 @@ class MainFragment() : BaseFragment() {
             hidingValueAnimator.start()
             android.os.Handler().postDelayed({
                 binding.filterOptionsConteiner.visibility = View.INVISIBLE
-            }, 800)
-            binding.textViewViewAll.isClickable = true
+            }, 200)
+            binding.filterButton.isClickable = true
         }
         binding.doneButton.setOnClickListener {
             hidingValueAnimator.start()
             android.os.Handler().postDelayed({
                 binding.filterOptionsConteiner.visibility = View.INVISIBLE
-            }, 800)
-            binding.textViewViewAll.isClickable = true
+            }, 200)
+            binding.filterButton.isClickable = true
+        }
+
+        binding.mainCartButton.setOnClickListener {
+            it.findNavController().navigate(R.id.action_mainFragment_to_cartFragment)
         }
     }
 
@@ -161,5 +188,9 @@ class MainFragment() : BaseFragment() {
     fun clickLike(id: String) {
         mainViewModel.clickLike(id)
         bestSellerAdapter?.notifyDataSetChanged()
+    }
+
+    fun goToProductDetails(view: View) {
+        view.findNavController().navigate(R.id.action_mainFragment_to_productDetailsFragment)
     }
 }

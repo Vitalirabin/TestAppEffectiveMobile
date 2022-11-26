@@ -10,13 +10,14 @@ import android.widget.TextView
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.testappeffectivemobile.BestSellerItemOnClickListener
 import com.example.testappeffectivemobile.ItemOnClickListener
 import com.example.testappeffectivemobile.R
 
 val diffCallback = BestSellerDiffUtils()
 
 class BestSellerAdapter(
-    val onClickListener: ItemOnClickListener
+    val onClickListener: BestSellerItemOnClickListener
 ) : ListAdapter<BestSellerModel, BestSellerAdapter.MyViewHolder>(diffCallback) {
 
 
@@ -28,7 +29,7 @@ class BestSellerAdapter(
         val like = itemView.findViewById<ImageButton>(R.id.like_image_button)
         fun bind(
             beastSellerModel: BestSellerModel,
-            onClickListener: ItemOnClickListener
+            onClickListener: BestSellerItemOnClickListener
         ) {
             Glide.with(imageView).load(beastSellerModel.picture).centerCrop().into(imageView)
             title.text = beastSellerModel.title
@@ -38,7 +39,7 @@ class BestSellerAdapter(
                 String.format("$%s", beastSellerModel.price_without_discount)
             if (beastSellerModel.is_favorites)
                 Glide.with(itemView).load(R.drawable.vector_like).into(like)
-            like.setOnClickListener { onClickListener.onClick(beastSellerModel.id) }
+            itemView.setOnClickListener { onClickListener.onClick(itemView) }
         }
     }
 

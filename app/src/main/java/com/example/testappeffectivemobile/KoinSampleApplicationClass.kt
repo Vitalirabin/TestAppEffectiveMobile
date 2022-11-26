@@ -1,9 +1,7 @@
 package com.example.testappeffectivemobile
 
 import android.app.Application
-import com.example.testappeffectivemobile.di.mainRepoModule
-import com.example.testappeffectivemobile.di.mainUseCase
-import com.example.testappeffectivemobile.di.mainViewModule
+import com.example.testappeffectivemobile.di.*
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -18,8 +16,10 @@ class KoinSampleApplicationClass : Application() {
             modules(
                 listOf(
                     mainRepoModule,
-                    mainViewModule,
-                    mainUseCase
+                    mainViewModule, mainUseCase,
+                    productRepoModule, productViewModule,
+                    productUseCase, cartRepoModule,
+                    cartViewModule, cartUseCase
                 )
             )
         }

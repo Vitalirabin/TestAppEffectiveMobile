@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
@@ -47,7 +46,7 @@
             android:layout_marginTop="25dp"
             android:layout_marginEnd="33dp"
             android:text="@string/view_all"
-            android:textColor="@color/orange"
+            android:textColor="@color/first_color"
             android:textSize="15sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/locate_spinner" />
@@ -61,15 +60,16 @@
             app:layout_constraintTop_toTopOf="@+id/locate_spinner"
             app:srcCompat="@mipmap/location_foreground" />
 
-        <ImageView
+        <ImageButton
             android:id="@+id/filter_button"
-            android:layout_width="13dp"
-            android:layout_height="13dp"
-            android:layout_marginTop="3dp"
-            android:layout_marginEnd="35dp"
+            android:layout_width="37dp"
+            android:layout_height="37dp"
+            android:layout_marginTop="9dp"
+            android:layout_marginEnd="13dp"
+            android:background="@color/invisible"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/locate_spinner"
-            app:srcCompat="@mipmap/filter_foreground" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/vectorfilter" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/select_category_recycle_view"
@@ -126,7 +126,7 @@
             android:background="@color/invisible"
             android:padding="0dp"
             android:text="@string/see_more"
-            android:textColor="@color/orange"
+            android:textColor="@color/first_color"
             android:textSize="10sp"
             app:layout_constraintBottom_toBottomOf="@+id/textView3"
             app:layout_constraintEnd_toEndOf="parent"
@@ -186,9 +186,9 @@
             android:layout_marginStart="52dp"
             android:background="@color/invisible"
             app:layout_constraintBottom_toBottomOf="@+id/view2"
-            app:layout_constraintStart_toEndOf="@+id/imageButton4"
+            app:layout_constraintStart_toEndOf="@+id/main_cart_button"
             app:layout_constraintTop_toTopOf="@+id/view2"
-            app:srcCompat="@drawable/vectorlike_white" />
+            app:srcCompat="@drawable/vector_unlike_white" />
 
         <TextView
             android:id="@+id/textView6"
@@ -212,7 +212,7 @@
             app:srcCompat="@drawable/item_select_category" />
 
         <ImageButton
-            android:id="@+id/imageButton4"
+            android:id="@+id/main_cart_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="46dp"
@@ -221,6 +221,17 @@
             app:layout_constraintStart_toEndOf="@+id/textView6"
             app:layout_constraintTop_toTopOf="@+id/view2"
             app:srcCompat="@drawable/vectorcart" />
+
+        <TextView
+            android:id="@+id/size_of_cart_text_view"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:background="@drawable/item_select_category_select"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="7sp"
+            app:layout_constraintEnd_toEndOf="@+id/main_cart_button"
+            app:layout_constraintTop_toTopOf="@+id/main_cart_button" />
 
         <ImageButton
             android:id="@+id/imageButton5"
@@ -241,6 +252,7 @@
             android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent">
 
             <ImageButton
@@ -341,6 +353,7 @@
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="@+id/size_filter_spinner"
                 app:layout_constraintTop_toBottomOf="@+id/prise_filter_spinner" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
